@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Student;
+import com.example.demo.model.Student2;
+import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +15,13 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    StudentRepository studentRepository;
 
     @GetMapping("/students")
     public ModelAndView getAll() {
         ModelAndView modelAndView = new ModelAndView("/index");
-        List<Student> list = studentService.findAll();
+        List<Student2> list = studentRepository.findAll();
         System.out.println(list);
         modelAndView.addObject("list", list);
         String name = "Như Anh";
