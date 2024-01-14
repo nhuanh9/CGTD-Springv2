@@ -19,8 +19,6 @@ import java.util.List;
 @Controller
 public class StudentController {
     @Autowired
-    private Validator validator;
-    @Autowired
     StudentService studentService;
     @Autowired
     StudentRepository studentRepository;

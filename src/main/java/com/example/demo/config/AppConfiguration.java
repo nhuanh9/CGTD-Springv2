@@ -114,12 +114,6 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
         return properties;
     }
     @Bean
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-        // Tùy chọn cấu hình khác nếu cần
-        return validatorFactoryBean;
-    }
-    @Bean
     public StudentService studentService() {
         return new StudentService();
     }
