@@ -7,6 +7,8 @@ import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class StudentController {
@@ -38,8 +41,13 @@ public class StudentController {
     public String showFormCreate() {
         return "/create";
     }
+
     @PostMapping("/save-student")
-    public String addStudent(@Valid Student2 student2) {
+    public String addStudent(@Valid Student2 student2, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listErr", bindingResult.getAllErrors());
+            return "/create";
+        }
         studentRepository.save(student2);
         return "redirect:/students";
     }
