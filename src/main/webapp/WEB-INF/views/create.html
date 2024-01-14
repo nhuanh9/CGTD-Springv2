@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form action="/save-student" method="post" th:object="${x}">
-    <input type="text" th:field="*{name}">
-    <input type="text" th:field="*{score}">
+<form action="/save-student" method="post">
+    <input type="text" name="name">
+    <input type="text" name="score">
     <button>Save</button>
 </form>
 

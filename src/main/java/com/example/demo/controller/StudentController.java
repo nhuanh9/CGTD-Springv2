@@ -35,12 +35,11 @@ public class StudentController {
     }
 
     @GetMapping("/add-student")
-    public String showFormCreate(Model model) {
-        model.addAttribute("x", new Student2());
+    public String showFormCreate() {
         return "/create";
     }
     @PostMapping("/save-student")
-    public String addStudent(@Valid @ModelAttribute("x") Student2 student2) {
+    public String addStudent(@Valid Student2 student2) {
         studentRepository.save(student2);
         return "redirect:/students";
     }
