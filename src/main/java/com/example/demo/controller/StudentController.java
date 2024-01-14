@@ -6,13 +6,20 @@ import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import javax.validation.Validator;
 import java.util.List;
 
 @Controller
 public class StudentController {
+    @Autowired
+    private Validator validator;
     @Autowired
     StudentService studentService;
     @Autowired
@@ -27,5 +34,16 @@ public class StudentController {
         String name = "Như Anh";
         modelAndView.addObject("x", name);
         return modelAndView;
+    }
+
+    @GetMapping("/add-student")
+    public String showFormCreate(Model model) {
+        model.addAttribute("x", new Student2());
+        return "/create";
+    }
+    @PostMapping("/save-student")
+    public String addStudent(@Valid @ModelAttribute("x") Student2 student2) {
+        studentRepository.save(student2);
+        return "redirect:/students";
     }
 }
